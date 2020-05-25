@@ -1,0 +1,16 @@
+This package provides a command =completing-history-insert-item= to
+insert an item from history using completion. It calls =completing-read=
+to do this, meaning it will work with your preferred completion
+framework. The package supports: the minibuffer, eshell, comint and
+term.
+
+There is also a function =completing-history-setup-keybinding= to setup
+a keybinding for you in all supported contexts. By default it binds
+=completing-history-insert-item= to =M-r= (usually bound to a command that
+gets the previous history item matching a regexp) and unbinds the
+companion =M-s= command (usually bound to a command that searches
+forward in the history).
+
+To customize the binding of =completing-history-insert-item=, use
+=completing-history-binding=. To keep =M-s= from being unbound customize
+=completing-history-unbind-M-s=.
