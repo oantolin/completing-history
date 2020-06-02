@@ -65,12 +65,21 @@
        when (and (boundp ring) (derived-mode-p mode))
        return (ring-elements (symbol-value ring))))))
 
+(defun completing-history--completion-table ()
+  "Relevant history items in reverse chronological order."
+  (let ((history (completing-history--items-for-buffer)))
+    (lambda (string pred action)
+      (if (eq action 'metadata)
+          '(metadata (display-sort-function . identity)
+                     (cycle-sort-function . identity))
+        (complete-with-action action history string pred)))))
+
 (defun completing-history-insert-item ()
   "Insert an item from history, selected with completion."
   (interactive)
   (let ((item (let ((enable-recursive-minibuffers t))
                 (completing-read
-                 "Item: " (completing-history--items-for-buffer) nil t))))
+                 "Item: " (completing-history--completion-table) nil t))))
     (when (minibufferp)
       (delete-minibuffer-contents))
     (when item
