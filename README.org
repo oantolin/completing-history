@@ -14,3 +14,24 @@ forward in the history).
 To customize the binding of =completing-history-insert-item=, use
 =completing-history-binding=. To keep =M-s= from being unbound customize
 =completing-history-unbind-M-s=.
+
+* Will this be put on MELPA?
+
+Sorry, there are no plans to put this on MELPA.
+
+If you prefer packages on MELPA, you can use the =consult-history=
+command from [[https://github.com/minad/consult][Consult]] instead of the =completing-history-insert-item=
+command from this package. By design, Consult does not setup any key
+bindings for you. You can get the effect of =(completing-history-setup-keybinding)= by binding =consult-history= to =M-r= and unbinding =M-s= in each of the following keymaps:
+
+ - =minibuffer-local-map=
+ - =eshell-hist-mode-map= if you are on Emacs >=27, and =esh-mode-map= for
+   Emacs <27. Note that if you are on Emacs <27 and want to bind
+   something in =esh-mode-map= you need to do it in the
+   =eshell-mode-hook=!
+ - =shell-mode-map=
+ - =term-mode-map=
+ - =term-raw-map=
+ - =comint-mode-map=
+ - =slime-repl-mode-map=
+
